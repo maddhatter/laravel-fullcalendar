@@ -5,7 +5,6 @@
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        editable: true,
         eventLimit: true,
         events: {{ $events }}
     });
