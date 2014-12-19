@@ -1,0 +1,20 @@
+{
+    "name": "madd-hatter/laravel-fullcalendar",
+    "description": "Laravel helper for FullCalendar.io",
+    "authors": [
+        {
+            "name": "Shawn Tunney",
+            "email": "shawn.tunney@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "MaddHatter\\LaravelFullcalendar": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
