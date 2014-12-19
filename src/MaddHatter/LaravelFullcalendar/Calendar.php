@@ -16,6 +16,11 @@ class Calendar
     protected $eventCollection;
 
     /**
+     * @var string
+     */
+    protected $id;
+
+    /**
      * @param Factory         $view
      * @param EventCollection $eventCollection
      */
@@ -27,7 +32,34 @@ class Calendar
 
     public function calendar()
     {
-        //TODO
+        return '<div id="calendar-' . $this->getId() . '"></div>';
+    }
+
+    public function script()
+    {
+        return $this->view->make('fullcalendar::script', [
+            'id' => $this->getId(),
+            'events' => $this->eventCollection->toJson(),
+        ]);
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        if ( ! empty($this->id)) {
+            return $this->id;
+        }
+
+        $this->id = str_random(8);
+
+        return $this->id;
     }
 
     /**
@@ -40,6 +72,15 @@ class Calendar
     public function addEvent(Event $event, array $customAttributes = [])
     {
         $this->eventCollection->push($event, $customAttributes);
+
+        return $this;
+    }
+
+    public function addEvents(array $events, array $customAttributes = [])
+    {
+        foreach ($events as $event) {
+            $this->eventCollection->push($event, $customAttributes);
+        }
 
         return $this;
     }
