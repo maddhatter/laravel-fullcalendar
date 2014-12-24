@@ -20,7 +20,7 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->app->bind('laravel-fullcalendar', function ($app) {
-            return $app->make('MaddHatter\LaurelviewFullcalendar\Calendar');
+            return $app->make('MaddHatter\LaravelFullcalendar\Calendar');
         });
     }
 
