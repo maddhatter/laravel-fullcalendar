@@ -46,6 +46,8 @@ $event = Calendar::event(
     '2015-02-14' //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
 );
 ```
+#### Implementing `Event` Interface
+
 Alternatively, you can use an existing class and have it implement `MaddHatter\LaravelFullcalendar\Event`. An example of an Eloquent model that implements the `Event` interface:
   
 ```php
