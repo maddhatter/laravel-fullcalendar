@@ -31,12 +31,25 @@ And optionally create an alias:
 You will also need to include [fullcalendar.io](http://fullcalendar.io/)'s files in your HTML.
 
 ## Usage
-You can either choose to implement the `MaddHatter\LaravelFullcalendar\Event` interface on classes you with to pass to a calendar (such as Eloquent models), or use the `MaddHatter\LaravelFullcalendar\SimpleEvent` DTO to create events.
 
-### Implement Interface on Eloquent Model
+### Creating Events
+
+#### Using `event()`:
+The simpliest way to create an event is to pass the event information to `Calendar::event()`:
+
+
+```php
+$event = Calendar::event(
+    "Valentine's Day", //event title
+    true, //full day event?
+    '2015-02-14', //start time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
+    '2015-02-14' //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
+);
+```
+Alternatively, you can use an existing class and have it implement `MaddHatter\LaravelFullcalendar\Event`. An example of an Eloquent model that implements the `Event` interface:
   
 ```php
-class Event extends Eloquent implements \MaddHatter\LaravelFullcalendar\Event
+class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Event
 {
 
     protected $dates = ['start', 'end'];
@@ -83,3 +96,66 @@ class Event extends Eloquent implements \MaddHatter\LaravelFullcalendar\Event
 }
 ```
 
+### Create a Calendar
+To create a calendar, in your route or controller, create your event(s), then pass them to `Calendar::addEvent()` or `Calendar::addEvents()` (to add an array of events). `addEvent()` and `addEvents()` can be used fluently (chained together). Their second parameter accepts an array of valid [FullCalendar Event Object parameters](http://fullcalendar.io/docs/event_data/Event_Object/).
+
+#### Sample Controller code:
+
+```php
+$events = [];
+
+$events[] = Calendar::event(
+    'Event One', //event title
+    false, //full day event?
+    '2015-02-11T0800', //start time (you can also use Carbon instead of DateTime)
+    '2015-02-12T0800' //end time (you can also use Carbon instead of DateTime)
+);
+
+$events[] = Calendar::event(
+    "Valentine's Day", //event title
+    true, //full day event?
+    new DateTime('2015-02-14'), //start time (you can also use Carbon instead of DateTime)
+    new DateTime('2015-02-14') //end time (you can also use Carbon instead of DateTime)
+);
+
+$eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
+
+$calendar = Calendar::addEvents($events) //add an array with addEvents
+    ->addEvent($eloquentEvent, [ //set custom color fo this event
+        'color' => '#800',
+    ]);
+
+return View::make('hello', compact('calendar'));
+```
+
+#### Sample View
+
+Then to display, add the following code to your View:
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.print.css"/>
+
+    <style>
+        /* ... */
+    </style>
+</head>
+<body>
+    {{ $calendar->calendar() }}
+    {{ $calendar->script() }}
+</body>
+</html>
+
+```
+
+The `script()` can be placed anywhere after `calendar()`, and must be after fullcalendar was included.
+
+This will generate (in February 2015):
+
+![](http://i.imgur.com/qjgVhCY.png)
