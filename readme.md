@@ -1,5 +1,7 @@
 # Laravel 4.2 Full Calendar Helper
 
+***For Laravel 5, use the [master](https://github.com/maddhatter/laravel-fullcalendar) branch***
+
 This is a simple helper package to make generating [http://fullcalendar.io](http://fullcalendar.io) in Laravel apps easier.
 
 ## Installing
@@ -11,7 +13,7 @@ Or add the following to your composer.json's require section and `composer updat
 
 ```json
 "require": {
-	"maddhatter/laravel-fullcalendar": "dev-master"
+	"maddhatter/laravel-fullcalendar": "~0.1"
 }
 ```
 
