@@ -1,4 +1,6 @@
-# Laravel 4.2 Full Calendar Helper
+# Laravel 5 Full Calendar Helper
+
+***For Laravel 4.2: use the [laravel-4 branch](https://github.com/maddhatter/laravel-fullcalendar/tree/laravel-4)***
 
 This is a simple helper package to make generating [http://fullcalendar.io](http://fullcalendar.io) in Laravel apps easier.
 
@@ -11,7 +13,7 @@ Or add the following to your composer.json's require section and `composer updat
 
 ```json
 "require": {
-	"maddhatter/laravel-fullcalendar": "dev-master"
+	"maddhatter/laravel-fullcalendar": "~1.0"
 }
 ```
 
@@ -39,7 +41,7 @@ The simpliest way to create an event is to pass the event information to `Calend
 
 
 ```php
-$event = Calendar::event(
+$event = \Calendar::event(
     "Valentine's Day", //event title
     true, //full day event?
     '2015-02-14', //start time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
@@ -106,29 +108,30 @@ To create a calendar, in your route or controller, create your event(s), then pa
 ```php
 $events = [];
 
-$events[] = Calendar::event(
+$events[] = \Calendar::event(
     'Event One', //event title
     false, //full day event?
     '2015-02-11T0800', //start time (you can also use Carbon instead of DateTime)
     '2015-02-12T0800' //end time (you can also use Carbon instead of DateTime)
 );
 
-$events[] = Calendar::event(
+$events[] = \Calendar::event(
     "Valentine's Day", //event title
     true, //full day event?
-    new DateTime('2015-02-14'), //start time (you can also use Carbon instead of DateTime)
-    new DateTime('2015-02-14') //end time (you can also use Carbon instead of DateTime)
+    new \DateTime('2015-02-14'), //start time (you can also use Carbon instead of DateTime)
+    new \DateTime('2015-02-14') //end time (you can also use Carbon instead of DateTime)
 );
 
 $eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
 
-$calendar = Calendar::addEvents($events) //add an array with addEvents
+$calendar = \Calendar::addEvents($events) //add an array with addEvents
     ->addEvent($eloquentEvent, [ //set custom color fo this event
         'color' => '#800',
     ]);
 
-return View::make('hello', compact('calendar'));
+return view('hello', compact('calendar'));
 ```
+
 
 #### Sample View
 
@@ -149,12 +152,12 @@ Then to display, add the following code to your View:
     </style>
 </head>
 <body>
-    {{ $calendar->calendar() }}
-    {{ $calendar->script() }}
+    {!! $calendar->calendar() !!}
+    {!! $calendar->script() !!}
 </body>
 </html>
-
 ```
+**Note:** The output from `calendar()` and `script()` must be non-escaped, so use `{!!` and `!!}` (or whatever you've configured your Blade compiler's raw tag directives as).   
 
 The `script()` can be placed anywhere after `calendar()`, and must be after fullcalendar was included.
 

@@ -6,6 +6,6 @@
             right: 'month,agendaWeek,agendaDay'
         },
         eventLimit: true,
-        events: {{ $events }}
+        events: {!! $events !!}
     });
 </script>

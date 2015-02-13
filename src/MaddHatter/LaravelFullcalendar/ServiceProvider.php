@@ -6,13 +6,6 @@ class ServiceProvider extends BaseServiceProvider
 {
 
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
      * Register the service provider.
      *
      * @return void
@@ -26,7 +19,7 @@ class ServiceProvider extends BaseServiceProvider
 
     public function boot()
     {
-        $this->package('madd-hatter/fullcalendar');
+        $this->loadViewsFrom(__DIR__ . '/../../views/', 'fullcalendar');
     }
 
     /**
@@ -36,7 +29,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return array();
+        return ['laravel-fullcalendar'];
     }
 
 }
