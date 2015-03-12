@@ -23,6 +23,11 @@ class EventCollection {
     {
         return $this->events->toJson();
     }
+    
+    public function toArray()
+    {
+        return $this->events->toArray();
+    }
 
     private function convertToArray(Event $event, array $customAttributes = [])
     {
