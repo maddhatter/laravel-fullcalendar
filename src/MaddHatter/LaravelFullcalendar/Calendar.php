@@ -22,6 +22,14 @@ class Calendar
     protected $id;
 
     /**
+    *
+    * @var array
+    *
+    **/
+    protected $additional;
+    
+
+    /**
      * @param Factory         $view
      * @param EventCollection $eventCollection
      */
@@ -29,6 +37,7 @@ class Calendar
     {
         $this->view            = $view;
         $this->eventCollection = $eventCollection;
+        $this->additional=array();
     }
 
     /**
@@ -62,10 +71,45 @@ class Calendar
      */
     public function script()
     {
-        return $this->view->make('fullcalendar::script', [
-            'id' => $this->getId(),
-            'events' => $this->eventCollection->toJson(),
-        ]);
+        $id=$this->getId();
+        $params=$this->getParams();
+        $params = json_encode($params);
+        return $this->view->make('fullcalendar::script', compact('id', 'params'))->render();
+    }
+
+    /**
+    *
+    * Getting the parameters
+    *
+    * @param $items
+    * @return string
+    **/
+    public function getParams($items=array())
+    {
+        $params=$this->additional;
+        $params['eventLimit'] = (isset($params['eventLimit']))?$params['eventLimit']:true;
+        if(isset($params['header']))
+        {
+            if (!is_array($params['header']))
+            {
+                $params['header'] = array();
+                $params['header']['left'] = 'prev,next today';
+                $params['header']['center'] = 'title';
+                $params['header']['right'] = 'month,agendaWeek,agendaDay';
+            }
+            
+        }
+        else
+        {
+            $params['header'] = array();
+            $params['header']['left'] = 'prev,next today';
+            $params['header']['center'] = 'title';
+            $params['header']['right'] = 'month,agendaWeek,agendaDay';
+        }
+        $params['events'] = (isset($params['events'])&&is_array($params['events']))
+                                    ?array_merge($params['events'],$this->eventCollection->toArray())
+                                    :$this->eventCollection->toArray();
+        return $params;
     }
 
     /**
@@ -127,4 +171,15 @@ class Calendar
 
         return $this;
     }
+
+    /**
+    *
+    * Set additional parameters
+    *
+    **/
+    public function setAdditionalParams(array $params=array())
+    {
+        $this->additional=$params;
+    }
+    
 }
