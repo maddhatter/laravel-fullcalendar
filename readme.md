@@ -127,7 +127,9 @@ $eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\Laravel
 $calendar = Calendar::addEvents($events) //add an array with addEvents
     ->addEvent($eloquentEvent, [ //set custom color fo this event
         'color' => '#800',
-    ]);
+    ])->setOptions([ //set fullcalendar options
+		'firstDay' => 1
+	]); 
 
 return View::make('hello', compact('calendar'));
 ```
