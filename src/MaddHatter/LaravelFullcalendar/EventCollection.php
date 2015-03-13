@@ -1,8 +1,9 @@
-<?php  namespace MaddHatter\LaravelFullcalendar;
+<?php namespace MaddHatter\LaravelFullcalendar;
 
 use Illuminate\Support\Collection;
 
-class EventCollection {
+class EventCollection
+{
 
     /**
      * @var Collection
@@ -24,6 +25,11 @@ class EventCollection {
         return $this->events->toJson();
     }
 
+    public function toArray()
+    {
+        return $this->events->toArray();
+    }
+
     private function convertToArray(Event $event, array $customAttributes = [])
     {
         return array_merge([
@@ -33,5 +39,6 @@ class EventCollection {
             'end' => $event->getEnd()->format('c'),
         ], $customAttributes);
     }
+
 
 }

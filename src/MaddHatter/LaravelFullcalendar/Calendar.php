@@ -22,6 +22,27 @@ class Calendar
     protected $id;
 
     /**
+     * Default options array
+     *
+     * @var array
+     */
+    protected $defaultOptions = [
+        'header' => [
+            'left' => 'prev,next today',
+            'center' => 'title',
+            'right' => 'month,agendaWeek,agendaDay',
+        ],
+        'eventLimit' => true,
+    ];
+
+    /**
+     * User defined options
+     *
+     * @var array
+     */
+    protected $userOptions = [];
+
+    /**
      * @param Factory         $view
      * @param EventCollection $eventCollection
      */
@@ -62,9 +83,11 @@ class Calendar
      */
     public function script()
     {
+        $options = $this->getOptionsJson();
+
         return $this->view->make('fullcalendar::script', [
             'id' => $this->getId(),
-            'events' => $this->eventCollection->toJson(),
+            'options' => $options,
         ]);
     }
 
@@ -126,5 +149,42 @@ class Calendar
         }
 
         return $this;
+    }
+
+    /**
+     * Set fullcalendar options
+     *
+     * @param array $options
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        $this->userOptions = $options;
+
+        return $this;
+    }
+
+    /**
+     * Get the fullcalendar options (not including the events list)
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return array_merge($this->defaultOptions, $this->userOptions);
+    }
+
+    /**
+     * Get options+events JSON
+     *
+     * @return array
+     */
+    protected function getOptionsJson()
+    {
+        $options = $this->getOptions();
+
+        $options['events'] = $this->eventCollection->toArray();
+
+        return json_encode($options);
     }
 }
