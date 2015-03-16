@@ -129,7 +129,9 @@ $calendar = Calendar::addEvents($events) //add an array with addEvents
         'color' => '#800',
     ])->setOptions([ //set fullcalendar options
 		'firstDay' => 1
-	]); 
+	])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+        'viewRender' => 'function() {alert("Callbacks!");}'
+    ]); 
 
 return View::make('hello', compact('calendar'));
 ```
