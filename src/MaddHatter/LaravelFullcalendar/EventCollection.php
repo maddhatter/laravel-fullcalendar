@@ -33,6 +33,7 @@ class EventCollection
     private function convertToArray(Event $event, array $customAttributes = [])
     {
         return array_merge([
+            'id' => $this->getEventId($event),
             'title' => $event->getTitle(),
             'allDay' => $event->isAllDay(),
             'start' => $event->getStart()->format('c'),
@@ -40,5 +41,12 @@ class EventCollection
         ], $customAttributes);
     }
 
+    private function getEventId(Event $event)
+    {
+        if ($event instanceof IdentifiableEvent) {
+            return $event->getId();
+        }
 
+        return null;
+    }
 }

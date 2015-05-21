@@ -4,7 +4,6 @@ use DateTime;
 
 interface Event
 {
-
     /**
      * Get the event's title
      *
