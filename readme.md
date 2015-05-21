@@ -45,7 +45,8 @@ $event = \Calendar::event(
     "Valentine's Day", //event title
     true, //full day event?
     '2015-02-14', //start time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
-    '2015-02-14' //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
+    '2015-02-14' //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
+	1 //optional event ID
 );
 ```
 #### Implementing `Event` Interface
@@ -106,6 +107,27 @@ class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Eve
 }
 ```
 
+#### `IdentifiableEvent` Interface
+
+If you wish for your existing class to have event IDs, implement `\MaddHatter\LaravelFullcalendar\IdentifiableEvent` instead. This interface extends `\MaddHatter\LaravelFullcalendar\Event` to add a `getId()` method:
+
+```php
+class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\IdentifiableEvent
+{
+
+	// Implement all Event methods ...
+
+    /**
+     * Get the event's ID
+     *
+     * @return int|string|null
+     */
+    public function getId();
+
+}
+
+```
+
 ### Create a Calendar
 To create a calendar, in your route or controller, create your event(s), then pass them to `Calendar::addEvent()` or `Calendar::addEvents()` (to add an array of events). `addEvent()` and `addEvents()` can be used fluently (chained together). Their second parameter accepts an array of valid [FullCalendar Event Object parameters](http://fullcalendar.io/docs/event_data/Event_Object/).
 
@@ -115,19 +137,19 @@ To create a calendar, in your route or controller, create your event(s), then pa
 $events = [];
 
 $events[] = \Calendar::event(
-    0, //event id
     'Event One', //event title
     false, //full day event?
     '2015-02-11T0800', //start time (you can also use Carbon instead of DateTime)
-    '2015-02-12T0800' //end time (you can also use Carbon instead of DateTime)
+    '2015-02-12T0800', //end time (you can also use Carbon instead of DateTime)
+	0 //optionally, you can specify an event ID
 );
 
 $events[] = \Calendar::event(
-    1, //event id
     "Valentine's Day", //event title
     true, //full day event?
     new \DateTime('2015-02-14'), //start time (you can also use Carbon instead of DateTime)
-    new \DateTime('2015-02-14') //end time (you can also use Carbon instead of DateTime)
+    new \DateTime('2015-02-14'), //end time (you can also use Carbon instead of DateTime)
+	'stringEventId' //optionally, you can specify an event ID
 );
 
 $eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
