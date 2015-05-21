@@ -15,6 +15,10 @@ class SimpleEvent implements Event
     /**
      * @var
      */
+    public $id;
+    /**
+     * @var
+     */
     public $title;
 
     /**
@@ -38,12 +42,23 @@ class SimpleEvent implements Event
      * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
      */
-    public function __construct($title, $isAllDay, $start, $end)
+    public function __construct($id, $title, $isAllDay, $start, $end)
     {
+        $this->id = $id;
         $this->title    = $title;
         $this->isAllDay = $isAllDay;
         $this->start    = $start instanceof DateTime ? $start : new DateTime($start);
         $this->end      = $start instanceof DateTime ? $end : new DateTime($end);
+    }
+
+    /**
+     * Get the event's id number
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
