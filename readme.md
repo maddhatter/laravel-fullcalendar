@@ -57,6 +57,12 @@ class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Eve
 {
 
     protected $dates = ['start', 'end'];
+    /**
+     * Get the event's id number
+     *
+     * @return int
+     */
+    public function getId();
 
     /**
      * Get the event's title
@@ -109,6 +115,7 @@ To create a calendar, in your route or controller, create your event(s), then pa
 $events = [];
 
 $events[] = \Calendar::event(
+    0, //event id
     'Event One', //event title
     false, //full day event?
     '2015-02-11T0800', //start time (you can also use Carbon instead of DateTime)
@@ -116,6 +123,7 @@ $events[] = \Calendar::event(
 );
 
 $events[] = \Calendar::event(
+    1, //event id
     "Valentine's Day", //event title
     true, //full day event?
     new \DateTime('2015-02-14'), //start time (you can also use Carbon instead of DateTime)
