@@ -1,5 +1,6 @@
 <?php namespace MaddHatter\LaravelFullcalendar;
 
+use ArrayAccess;
 use DateTime;
 use Illuminate\View\Factory;
 
@@ -145,7 +146,7 @@ class Calendar
     /**
      * Add multiple events
      *
-     * @param array|Collection $events
+     * @param array|ArrayAccess $events
      * @param array $customAttributes
      * @return $this
      */

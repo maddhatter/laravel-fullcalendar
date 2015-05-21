@@ -5,13 +5,6 @@ use DateTime;
 interface Event
 {
     /**
-     * Get the event's id number
-     *
-     * @return int
-     */
-    public function getId();
-
-    /**
      * Get the event's title
      *
      * @return string

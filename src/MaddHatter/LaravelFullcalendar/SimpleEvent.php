@@ -9,15 +9,16 @@ use DateTime;
  *
  * @package MaddHatter\LaravelFullcalendar
  */
-class SimpleEvent implements Event
+class SimpleEvent implements IdentifiableEvent
 {
 
     /**
-     * @var
+     * @var string|int|null
      */
     public $id;
+
     /**
-     * @var
+     * @var string
      */
     public $title;
 
@@ -41,14 +42,15 @@ class SimpleEvent implements Event
      * @param bool            $isAllDay
      * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
+     * @param int|string|null $id
      */
-    public function __construct($id, $title, $isAllDay, $start, $end)
+    public function __construct($title, $isAllDay, $start, $end, $id = null)
     {
-        $this->id = $id;
         $this->title    = $title;
         $this->isAllDay = $isAllDay;
         $this->start    = $start instanceof DateTime ? $start : new DateTime($start);
         $this->end      = $start instanceof DateTime ? $end : new DateTime($end);
+        $this->id       = $id;
     }
 
     /**
