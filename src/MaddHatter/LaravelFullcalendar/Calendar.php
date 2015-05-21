@@ -145,11 +145,11 @@ class Calendar
     /**
      * Add multiple events
      *
-     * @param array $events
+     * @param array|Collection $events
      * @param array $customAttributes
      * @return $this
      */
-    public function addEvents(array $events, array $customAttributes = [])
+    public function addEvents($events, array $customAttributes = [])
     {
         foreach ($events as $event) {
             $this->eventCollection->push($event, $customAttributes);
@@ -209,7 +209,7 @@ class Calendar
      *
      * @return string
      */
-    protected function getOptionsJson()
+    public function getOptionsJson()
     {
         $options      = $this->getOptions();
         $placeholders = $this->getCallbackPlaceholders();
