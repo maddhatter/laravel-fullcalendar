@@ -1,7 +1,7 @@
 <?php namespace MaddHatter\LaravelFullcalendar;
 
 use DateTime;
-use Illuminate\View\Factory;
+use Illuminate\Support\Facades\View;
 
 class Calendar
 {
@@ -53,9 +53,8 @@ class Calendar
      * @param Factory         $view
      * @param EventCollection $eventCollection
      */
-    public function __construct(Factory $view, EventCollection $eventCollection)
+    public function __construct(EventCollection $eventCollection)
     {
-        $this->view            = $view;
         $this->eventCollection = $eventCollection;
     }
 
@@ -68,9 +67,9 @@ class Calendar
      * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @return SimpleEvent
      */
-    public static function event($title, $isAllDay, $start, $end)
+    public static function event($title, $isAllDay, $start, $end, $id = null, $color = '#3a87ad', $url = null)
     {
-        return new SimpleEvent($title, $isAllDay, $start, $end);
+        return new SimpleEvent($title, $isAllDay, $start, $end, $id, $color, $url);
     }
 
     /**
@@ -92,7 +91,7 @@ class Calendar
     {
         $options = $this->getOptionsJson();
 
-        return $this->view->make('fullcalendar::script', [
+        return View::make('fullcalendar::script', [
             'id' => $this->getId(),
             'options' => $options,
         ]);
