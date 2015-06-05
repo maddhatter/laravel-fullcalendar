@@ -2,7 +2,7 @@
 
 use ArrayAccess;
 use DateTime;
-use Illuminate\View\Factory;
+use Illuminate\Support\Facades\View;
 
 class Calendar
 {
@@ -51,12 +51,10 @@ class Calendar
     protected $callbacks = [];
 
     /**
-     * @param Factory         $view
      * @param EventCollection $eventCollection
      */
-    public function __construct(Factory $view, EventCollection $eventCollection)
+    public function __construct(EventCollection $eventCollection)
     {
-        $this->view            = $view;
         $this->eventCollection = $eventCollection;
     }
 
@@ -93,7 +91,7 @@ class Calendar
     {
         $options = $this->getOptionsJson();
 
-        return $this->view->make('fullcalendar::script', [
+        return View::make('fullcalendar::script', [
             'id' => $this->getId(),
             'options' => $options,
         ]);
