@@ -53,9 +53,9 @@ class Calendar
     /**
      * @param EventCollection $eventCollection
      */
-    public function __construct(EventCollection $eventCollection)
+    public function __construct()
     {
-        $this->eventCollection = $eventCollection;
+        $this->eventCollection = new EventCollection();
     }
 
     /**
