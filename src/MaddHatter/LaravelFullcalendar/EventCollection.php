@@ -33,10 +33,13 @@ class EventCollection
     private function convertToArray(Event $event, array $customAttributes = [])
     {
         return array_merge([
-            'title' => $event->getTitle(),
-            'allDay' => $event->isAllDay(),
-            'start' => $event->getStart()->format('c'),
-            'end' => $event->getEnd()->format('c'),
+            'id'        => $event->getId(),
+            'title'     => $event->getTitle(),
+            'allDay'    => $event->isAllDay(),
+            'start'     => $event->getStart()->format('c'),
+            'end'       => $event->getEnd()->format('c'),
+            'color'     => $event->getColor(),
+            'url'       => $event->getUrl()
         ], $customAttributes);
     }
 
