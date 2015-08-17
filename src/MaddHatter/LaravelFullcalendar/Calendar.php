@@ -70,7 +70,7 @@ class Calendar
      * @param string          $id              event Id
      * @return SimpleEvent
      */
-    public static function event($title, $isAllDay, $start, $end, $id)
+    public static function event($title, $isAllDay, $start, $end, $id = null)
     {
         return new SimpleEvent($title, $isAllDay, $start, $end, $id);
     }
