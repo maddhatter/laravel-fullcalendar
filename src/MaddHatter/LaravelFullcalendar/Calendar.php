@@ -67,12 +67,13 @@ class Calendar
      * @param string          $isAllDay
      * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
-     * @param string          $id              event Id
+     * @param string          $id    event Id
+     * @param array           $options
      * @return SimpleEvent
      */
-    public static function event($title, $isAllDay, $start, $end, $id = null)
+    public static function event($title, $isAllDay, $start, $end, $id = null, $options = [])
     {
-        return new SimpleEvent($title, $isAllDay, $start, $end, $id);
+        return new SimpleEvent($title, $isAllDay, $start, $end, $id, $options);
     }
 
     /**
