@@ -49,7 +49,7 @@ class SimpleEvent implements IdentifiableEvent
         $this->title    = $title;
         $this->isAllDay = $isAllDay;
         $this->start    = $start instanceof DateTime ? $start : new DateTime($start);
-        $this->end      = $start instanceof DateTime ? $end : new DateTime($end);
+        $this->end      = $end instanceof DateTime ? $end : new DateTime($end);
         $this->id       = $id;
     }
 
