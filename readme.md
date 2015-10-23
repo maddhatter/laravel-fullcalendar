@@ -46,7 +46,10 @@ $event = \Calendar::event(
     true, //full day event?
     '2015-02-14', //start time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
     '2015-02-14' //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
-	1 //optional event ID
+	1, //optional event ID
+	[
+		'url' => 'http://full-calendar.io'
+	]
 );
 ```
 #### Implementing `Event` Interface
@@ -127,6 +130,55 @@ class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Ide
      */
     public function getId();
 
+}
+
+```
+
+### Additional Event Parameters
+
+If you want to add [additional parameters](http://fullcalendar.io/docs/event_data/Event_Object) to your events, there are two options:
+
+#### Using `Calendar::event()`
+
+Pass an array of `'parameter' => 'value'` pairs as the 6th parameter to `Calendar::event()`:
+
+```php
+$event = \Calendar::event(
+    "Valentine's Day", //event title
+    true, //full day event?
+    '2015-02-14', //start time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
+    '2015-02-14' //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
+	1, //optional event ID
+	[
+		'url' => 'http://full-calendar.io',
+		//any other full-calendar supported parameters
+	]
+);
+
+```
+
+#### Add an `getEventOptions` method to your event class
+
+```php
+<?php
+class CalendarEvent extends \Illuminate\Database\Eloquent\Model implements \MaddHatter\LaravelFullcalendar\Event
+{
+	//...
+
+	/**
+     * Optional FullCalendar.io settings for this event
+     *
+     * @return array
+     */
+    public function getEventOptions()
+    {
+        return [
+            'color' => $this->background_color,
+			//etc
+        ];
+    }	
+
+	//...
 }
 
 ```
