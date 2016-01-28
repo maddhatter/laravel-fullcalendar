@@ -218,7 +218,10 @@ class Calendar
         $placeholders = $this->getCallbackPlaceholders();
         $parameters   = array_merge($options, $placeholders);
 
-        $parameters['events'] = $this->eventCollection->toArray();
+        // Allow the user to override the events list with a url
+        if (!isset($parameters['events'])) {
+            $parameters['events'] = $this->eventCollection->toArray();
+        }
 
         $json = json_encode($parameters);
 
