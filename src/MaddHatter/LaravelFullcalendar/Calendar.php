@@ -1,5 +1,6 @@
 <?php namespace MaddHatter\LaravelFullcalendar;
 
+use ArrayAccess;
 use DateTime;
 use Illuminate\View\Factory;
 
@@ -27,10 +28,10 @@ class Calendar
      * @var array
      */
     protected $defaultOptions = [
-        'header' => [
-            'left' => 'prev,next today',
+        'header'     => [
+            'left'   => 'prev,next today',
             'center' => 'title',
-            'right' => 'month,agendaWeek,agendaDay',
+            'right'  => 'month,agendaWeek,agendaDay',
         ],
         'eventLimit' => true,
     ];
@@ -40,14 +41,14 @@ class Calendar
      *
      * @var array
      */
-    protected $userOptions = [];
+    protected $userOptions = [ ];
 
     /**
      * User defined callback options
      *
      * @var array
      */
-    protected $callbacks = [];
+    protected $callbacks = [ ];
 
     /**
      * @param Factory         $view
@@ -66,11 +67,14 @@ class Calendar
      * @param string          $isAllDay
      * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
+     * @param string          $id    event Id
+     * @param array           $options
+     *
      * @return SimpleEvent
      */
-    public static function event($title, $isAllDay, $start, $end)
+    public static function event($title, $isAllDay, $start, $end, $id = null, $options = [])
     {
-        return new SimpleEvent($title, $isAllDay, $start, $end);
+        return new SimpleEvent($title, $isAllDay, $start, $end, $id, $options);
     }
 
     /**
@@ -93,7 +97,7 @@ class Calendar
         $options = $this->getOptionsJson();
 
         return $this->view->make('fullcalendar::script', [
-            'id' => $this->getId(),
+            'id'      => $this->getId(),
             'options' => $options,
         ]);
     }
@@ -102,6 +106,7 @@ class Calendar
      * Customize the ID of the generated <div>
      *
      * @param string $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -119,7 +124,7 @@ class Calendar
      */
     public function getId()
     {
-        if ( ! empty($this->id)) {
+        if (!empty($this->id)) {
             return $this->id;
         }
 
@@ -133,9 +138,10 @@ class Calendar
      *
      * @param Event $event
      * @param array $customAttributes
+     *
      * @return $this
      */
-    public function addEvent(Event $event, array $customAttributes = [])
+    public function addEvent(Event $event, array $customAttributes = [ ])
     {
         $this->eventCollection->push($event, $customAttributes);
 
@@ -147,9 +153,10 @@ class Calendar
      *
      * @param array $events
      * @param array $customAttributes
+     *
      * @return $this
      */
-    public function addEvents(array $events, array $customAttributes = [])
+    public function addEvents(array $events, array $customAttributes = [ ])
     {
         foreach ($events as $event) {
             $this->eventCollection->push($event, $customAttributes);
@@ -162,6 +169,7 @@ class Calendar
      * Set fullcalendar options
      *
      * @param array $options
+     *
      * @return $this
      */
     public function setOptions(array $options)
@@ -185,6 +193,7 @@ class Calendar
      * Set fullcalendar callback options
      *
      * @param array $callbacks
+     *
      * @return $this
      */
     public function setCallbacks(array $callbacks)
@@ -224,7 +233,6 @@ class Calendar
         }
 
         return $json;
-
     }
 
     /**
@@ -235,7 +243,7 @@ class Calendar
     protected function getCallbackPlaceholders()
     {
         $callbacks    = $this->getCallbacks();
-        $placeholders = [];
+        $placeholders = [ ];
 
         foreach ($callbacks as $name => $callback) {
             $placeholders[$name] = '[' . md5($callback) . ']';
@@ -249,12 +257,13 @@ class Calendar
      *
      * @param $json
      * @param $placeholders
+     *
      * @return string
      */
     protected function replaceCallbackPlaceholders($json, $placeholders)
     {
-        $search  = [];
-        $replace = [];
+        $search  = [ ];
+        $replace = [ ];
 
         foreach ($placeholders as $name => $placeholder) {
             $search[]  = '"' . $placeholder . '"';
