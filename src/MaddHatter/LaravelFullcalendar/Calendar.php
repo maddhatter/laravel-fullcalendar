@@ -1,5 +1,6 @@
 <?php namespace MaddHatter\LaravelFullcalendar;
 
+use ArrayAccess;
 use DateTime;
 use Illuminate\View\Factory;
 
@@ -66,11 +67,13 @@ class Calendar
      * @param string          $isAllDay
      * @param string|DateTime $start If string, must be valid datetime format: http://bit.ly/1z7QWbg
      * @param string|DateTime $end   If string, must be valid datetime format: http://bit.ly/1z7QWbg
+     * @param string          $id    event Id
+     * @param array           $options
      * @return SimpleEvent
      */
-    public static function event($title, $isAllDay, $start, $end)
+    public static function event($title, $isAllDay, $start, $end, $id = null, $options = [])
     {
-        return new SimpleEvent($title, $isAllDay, $start, $end);
+        return new SimpleEvent($title, $isAllDay, $start, $end, $id, $options);
     }
 
     /**
@@ -224,7 +227,6 @@ class Calendar
         }
 
         return $json;
-
     }
 
     /**
