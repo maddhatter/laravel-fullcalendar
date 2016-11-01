@@ -22,13 +22,13 @@ Or add the following to your composer.json's require section and `composer updat
 Then register the service provider in your `app.php` config file:
 
 ```php
-'MaddHatter\LaravelFullcalendar\ServiceProvider',
+MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 ```
 
 And optionally create an alias:
 
 ```php
-'Calendar' => 'MaddHatter\LaravelFullcalendar\Facades\Calendar',
+'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 
 ```
 
@@ -47,7 +47,7 @@ $event = \Calendar::event(
     "Valentine's Day", //event title
     true, //full day event?
     '2015-02-14', //start time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
-    '2015-02-14' //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
+    '2015-02-14', //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
 	1, //optional event ID
 	[
 		'url' => 'http://full-calendar.io'
