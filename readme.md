@@ -149,7 +149,7 @@ $event = \Calendar::event(
     "Valentine's Day", //event title
     true, //full day event?
     '2015-02-14', //start time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg)
-    '2015-02-14' //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
+    '2015-02-14', //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
 	1, //optional event ID
 	[
 		'url' => 'http://full-calendar.io',
