@@ -17,5 +17,15 @@
             "MaddHatter\\LaravelFullcalendar": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MaddHatter\\LaravelFullcalendar\\ServiceProvider"
+            ],
+            "aliases": {
+                "Calendar": "MaddHatter\\LaravelFullcalendar\\Facades\\Calendar"
+            }
+        }
+    },
     "minimum-stability": "stable"
 }
