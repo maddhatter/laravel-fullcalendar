@@ -19,7 +19,9 @@ Or add the following to your composer.json's require section and `composer updat
 }
 ```
 
-Then register the service provider in your `app.php` config file:
+### Laravel 5.4 (and earlier)
+
+Register the service provider in your `app.php` config file:
 
 ```php
 MaddHatter\LaravelFullcalendar\ServiceProvider::class,
@@ -31,6 +33,9 @@ And optionally create an alias:
 'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 
 ```
+
+### Laravel 5.5+
+The provider and `Calendar` alias will be registered automatically.
 
 You will also need to include [fullcalendar.io](http://fullcalendar.io/)'s files in your HTML.
 
@@ -57,7 +62,7 @@ $event = \Calendar::event(
 #### Implementing `Event` Interface
 
 Alternatively, you can use an existing class and have it implement `MaddHatter\LaravelFullcalendar\Event`. An example of an Eloquent model that implements the `Event` interface:
-  
+
 ```php
 class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Event
 {
@@ -178,7 +183,7 @@ class CalendarEvent extends \Illuminate\Database\Eloquent\Model implements \Madd
             'color' => $this->background_color,
 			//etc
         ];
-    }	
+    }
 
 	//...
 }
@@ -218,7 +223,7 @@ $calendar = \Calendar::addEvents($events) //add an array with addEvents
 		'firstDay' => 1
 	])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
         'viewRender' => 'function() {alert("Callbacks!");}'
-    ]); 
+    ]);
 
 return view('hello', compact('calendar'));
 ```
@@ -236,7 +241,7 @@ Then to display, add the following code to your View:
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-    	
+
 
     <style>
         /* ... */
