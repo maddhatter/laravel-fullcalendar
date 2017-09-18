@@ -19,9 +19,9 @@ Or add the following to your composer.json's require section and `composer updat
 }
 ```
 
-> If your Laravel version is 5.5+ you can skip the next 2 steps.
+### Laravel 5.4 (and earlier)
 
-Then register the service provider in your `app.php` config file:
+Register the service provider in your `app.php` config file:
 
 ```php
 MaddHatter\LaravelFullcalendar\ServiceProvider::class,
@@ -33,6 +33,9 @@ And optionally create an alias:
 'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
 
 ```
+
+### Laravel 5.5+
+The provider and `Calendar` alias will be registered automatically.
 
 You will also need to include [fullcalendar.io](http://fullcalendar.io/)'s files in your HTML.
 
