@@ -39,6 +39,16 @@ class EventCollection
             'start' => $event->getStart()->format('c'),
             'end' => $event->getEnd()->format('c'),
         ];
+        
+        /* On recurring events, fullcalendar requires the start and end values to just contain the time (hour:minutes)
+            part of the date
+        */
+        if ($vOptions = $event->getEventOptions()) {
+            if (isset($vOptions['ranges']) || isset($vOptions['dow'])) {
+                $eventArray['start'] = $event->getStart()->format('H:i');
+                $eventArray['end'] = $event->getEnd()->format('H:i');
+            }
+        }
 
         $eventOptions = method_exists($event, 'getEventOptions') ? $event->getEventOptions() : [];
 
