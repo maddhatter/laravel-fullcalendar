@@ -225,6 +225,11 @@ class Calendar
 
         $json = json_encode($parameters);
 
+		if( isset($options['customButtons']))
+		{
+			 $json = $this->replaceClickCustomButtons($json, $options['customButtons']);
+		}
+
         if ($placeholders) {
             return $this->replaceCallbackPlaceholders($json, $placeholders);
         }
@@ -269,5 +274,24 @@ class Calendar
 
         return str_replace($search, $replace, $json);
     }
+    
+    
+    /**
+     * Replace click handlers for customButtons with non-JSON encoded values
+     *
+     * @param $json
+     * @param $customButtons ($options['customButton'])
+     * @return string
+     */
+    protected function replaceClickCustomButtons($json, $customButtons)
+	{
+		foreach ($customButtons as $name => $options) {
+			if(isset($options['click']))
+			{
+				$json = str_replace(json_encode($options['click']), $options['click'], $json);
+			}
+		}
+		return $json;
+	}
 
 }
