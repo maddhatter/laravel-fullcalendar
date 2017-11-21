@@ -162,6 +162,16 @@ class Calendar
     }
 
     /**
+     * Clear events
+     *
+     */
+    public function removeEvents()
+    {
+        $this->eventCollection = new EventCollection;
+        return $this;
+    }
+
+    /**
      * Set fullcalendar options
      *
      * @param array $options
