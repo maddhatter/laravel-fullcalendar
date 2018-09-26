@@ -162,6 +162,19 @@ class Calendar
     }
 
     /**
+     * Set fullcalendar default options
+     *
+     * @param array $options
+     * @return $this
+     */
+    public function setDefaultOptions(array $options)
+    {
+        $this->defaultOptions = $options;
+
+        return $this;
+    }
+
+    /**
      * Set fullcalendar options
      *
      * @param array $options
