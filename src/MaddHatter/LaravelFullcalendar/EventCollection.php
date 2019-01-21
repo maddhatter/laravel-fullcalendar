@@ -1,5 +1,6 @@
 <?php namespace MaddHatter\LaravelFullcalendar;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class EventCollection
@@ -36,8 +37,8 @@ class EventCollection
             'id' => $this->getEventId($event),
             'title' => $event->getTitle(),
             'allDay' => $event->isAllDay(),
-            'start' => $event->getStart()->format('c'),
-            'end' => $event->getEnd()->format('c'),
+            'start' => Carbon::parse($event->getStart())->format('c'),
+            'end' => Carbon::parse($event->getEnd())->format('c'),
         ];
 
         $eventOptions = method_exists($event, 'getEventOptions') ? $event->getEventOptions() : [];
