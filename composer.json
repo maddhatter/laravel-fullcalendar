@@ -8,6 +8,7 @@
             "email": "shawn.tunney@gmail.com"
         }
     ],
+    "abandoned": true,
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "~5.0"
