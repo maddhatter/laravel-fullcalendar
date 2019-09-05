@@ -1,5 +1,5 @@
 {
-    "name": "maddhatter/laravel-fullcalendar",
+    "name": "dabates/laravel-fullcalendar",
     "description": "Laravel helper for FullCalendar.io",
     "license": "MIT",
     "authors": [
@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "~5.0"
+        "illuminate/support": "~6.0"
     },
     "autoload": {
         "psr-0": {
