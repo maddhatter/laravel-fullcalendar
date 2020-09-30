@@ -15,7 +15,7 @@ Or add the following to your composer.json's require section and `composer updat
 
 ```json
 "require": {
-	"maddhatter/laravel-fullcalendar": "~1.0"
+    "maddhatter/laravel-fullcalendar": "~1.0"
 }
 ```
 
@@ -55,7 +55,7 @@ $event = \Calendar::event(
     '2015-02-14', //end time, must be a DateTime object or valid DateTime format (http://bit.ly/1z7QWbg),
 	1, //optional event ID
 	[
-		'url' => 'http://full-calendar.io'
+	   'url' => 'http://full-calendar.io'
 	]
 );
 ```
@@ -75,8 +75,8 @@ class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Eve
      * @return int
      */
     public function getId() {
-		return $this->id;
-	}
+	return $this->id;
+    }
 
     /**
      * Get the event's title
