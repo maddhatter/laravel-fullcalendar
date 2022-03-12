@@ -1,6 +1,6 @@
 # Laravel Full Calendar Helper
 
-[![Latest Stable Version](https://poser.pugx.org/maddhatter/laravel-fullcalendar/v/stable)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![Total Downloads](https://poser.pugx.org/maddhatter/laravel-fullcalendar/downloads)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![Latest Unstable Version](https://poser.pugx.org/maddhatter/laravel-fullcalendar/v/unstable)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![License](https://poser.pugx.org/maddhatter/laravel-fullcalendar/license)](https://packagist.org/packages/maddhatter/laravel-fullcalendar)
+[![Latest Stable Version](http://poser.pugx.org/mralston/laravel-fullcalendar/v)](https://packagist.org/packages/mralston/laravel-fullcalendar) [![Total Downloads](http://poser.pugx.org/mralston/laravel-fullcalendar/downloads)](https://packagist.org/packages/mralston/laravel-fullcalendar) [![Latest Unstable Version](http://poser.pugx.org/mralston/laravel-fullcalendar/v/unstable)](https://packagist.org/packages/mralston/laravel-fullcalendar) [![License](http://poser.pugx.org/mralston/laravel-fullcalendar/license)](https://packagist.org/packages/mralston/laravel-fullcalendar) [![PHP Version Require](http://poser.pugx.org/mralston/laravel-fullcalendar/require/php)](https://packagist.org/packages/mralston/laravel-fullcalendar)
 
 ## IMPORTANT NOTICE
 
