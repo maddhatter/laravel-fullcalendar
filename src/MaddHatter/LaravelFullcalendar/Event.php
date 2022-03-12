@@ -1,4 +1,4 @@
-<?php namespace MaddHatter\LaravelFullcalendar;
+<?php namespace Mralston\LaravelFullcalendar;
 
 use DateTime;
 

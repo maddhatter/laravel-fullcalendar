@@ -1,4 +1,4 @@
-<?php namespace MaddHatter\LaravelFullcalendar;
+<?php namespace Mralston\LaravelFullcalendar;
 
 use DateTime;
 
@@ -7,7 +7,7 @@ use DateTime;
  *
  * Simple DTO that implements the Event interface
  *
- * @package MaddHatter\LaravelFullcalendar
+ * @package Mralston\LaravelFullcalendar
  */
 class SimpleEvent implements IdentifiableEvent
 {
