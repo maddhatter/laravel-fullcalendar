@@ -1,6 +1,10 @@
-# Laravel 5 Full Calendar Helper
+# Laravel Full Calendar Helper
 
-[![Latest Stable Version](https://poser.pugx.org/maddhatter/laravel-fullcalendar/v/stable)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![Total Downloads](https://poser.pugx.org/maddhatter/laravel-fullcalendar/downloads)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![Latest Unstable Version](https://poser.pugx.org/maddhatter/laravel-fullcalendar/v/unstable)](https://packagist.org/packages/maddhatter/laravel-fullcalendar) [![License](https://poser.pugx.org/maddhatter/laravel-fullcalendar/license)](https://packagist.org/packages/maddhatter/laravel-fullcalendar)
+[![Latest Stable Version](http://poser.pugx.org/mralston/laravel-fullcalendar/v)](https://packagist.org/packages/mralston/laravel-fullcalendar) [![Total Downloads](http://poser.pugx.org/mralston/laravel-fullcalendar/downloads)](https://packagist.org/packages/mralston/laravel-fullcalendar) [![Latest Unstable Version](http://poser.pugx.org/mralston/laravel-fullcalendar/v/unstable)](https://packagist.org/packages/mralston/laravel-fullcalendar) [![License](http://poser.pugx.org/mralston/laravel-fullcalendar/license)](https://packagist.org/packages/mralston/laravel-fullcalendar) [![PHP Version Require](http://poser.pugx.org/mralston/laravel-fullcalendar/require/php)](https://packagist.org/packages/mralston/laravel-fullcalendar)
+
+## IMPORTANT NOTICE
+
+> This is a fork of [maddhatter/laravel-fullcalendar](https://github.com/maddhatter/laravel-fullcalendar), created solely because the original package ceases to support Laravel versions after 5.0. I have created this fork for personal usage and will attempt to maintain it for as long as I require it, but please do not rely on it for production sites. 
 
 ***For Laravel 4.2: use the [laravel-4 branch](https://github.com/maddhatter/laravel-fullcalendar/tree/laravel-4)***
 
@@ -9,13 +13,13 @@ This is a simple helper package to make generating [http://fullcalendar.io](http
 ## Installing
 Require the package with composer using the following command:
 
-    composer require maddhatter/laravel-fullcalendar
+    composer require mralston/laravel-fullcalendar
 
 Or add the following to your composer.json's require section and `composer update`
 
 ```json
 "require": {
-	"maddhatter/laravel-fullcalendar": "~1.0"
+	"mralston/laravel-fullcalendar": "~1.0"
 }
 ```
 
@@ -24,13 +28,13 @@ Or add the following to your composer.json's require section and `composer updat
 Register the service provider in your `app.php` config file:
 
 ```php
-MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+Mralston\LaravelFullcalendar\ServiceProvider::class,
 ```
 
 And optionally create an alias:
 
 ```php
-'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+'Calendar' => Mralston\LaravelFullcalendar\Facades\Calendar::class,
 
 ```
 
@@ -61,10 +65,10 @@ $event = \Calendar::event(
 ```
 #### Implementing `Event` Interface
 
-Alternatively, you can use an existing class and have it implement `MaddHatter\LaravelFullcalendar\Event`. An example of an Eloquent model that implements the `Event` interface:
+Alternatively, you can use an existing class and have it implement `Mralston\LaravelFullcalendar\Event`. An example of an Eloquent model that implements the `Event` interface:
 
 ```php
-class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Event
+class EventModel extends Eloquent implements \Mralston\LaravelFullcalendar\Event
 {
 
     protected $dates = ['start', 'end'];
@@ -122,10 +126,10 @@ class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\Eve
 
 #### `IdentifiableEvent` Interface
 
-If you wish for your existing class to have event IDs, implement `\MaddHatter\LaravelFullcalendar\IdentifiableEvent` instead. This interface extends `\MaddHatter\LaravelFullcalendar\Event` to add a `getId()` method:
+If you wish for your existing class to have event IDs, implement `\Mralston\LaravelFullcalendar\IdentifiableEvent` instead. This interface extends `\Mralston\LaravelFullcalendar\Event` to add a `getId()` method:
 
 ```php
-class EventModel extends Eloquent implements \MaddHatter\LaravelFullcalendar\IdentifiableEvent
+class EventModel extends Eloquent implements \Mralston\LaravelFullcalendar\IdentifiableEvent
 {
 
 	// Implement all Event methods ...
@@ -168,7 +172,7 @@ $event = \Calendar::event(
 
 ```php
 <?php
-class CalendarEvent extends \Illuminate\Database\Eloquent\Model implements \MaddHatter\LaravelFullcalendar\Event
+class CalendarEvent extends \Illuminate\Database\Eloquent\Model implements \Mralston\LaravelFullcalendar\Event
 {
 	//...
 
@@ -214,7 +218,7 @@ $events[] = \Calendar::event(
 	'stringEventId' //optionally, you can specify an event ID
 );
 
-$eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
+$eloquentEvent = EventModel::first(); //EventModel implements Mralston\LaravelFullcalendar\Event
 
 $calendar = \Calendar::addEvents($events) //add an array with addEvents
     ->addEvent($eloquentEvent, [ //set custom color fo this event
